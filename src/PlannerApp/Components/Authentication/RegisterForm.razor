@@ -1,7 +1,10 @@
-﻿@namespace PlannerApp.Components
+﻿@page "/authentication/register"
+@namespace PlannerApp.Components
 
-<EditForm Model="_model" OnValidSubmit="LoginUserAsync">
-    <DataAnnotationsValidator />
+
+
+<EditForm Model="_model" OnValidSubmit="RegisterUserAsync">
+    <FluentValidationValidator />
 
     <MudCard>
         <MudCardHeader>
@@ -11,7 +14,10 @@
         </MudCardHeader>
         <MudCardContent>
             <MudTextField Label="Email" HelperText="Required" @bind-Value="@_model.Email" />
+            <MudTextField Label="First Name" HelperText="Required" @bind-Value="@_model.FirstName" />
+            <MudTextField Label="Last Name" HelperText="Required" @bind-Value="@_model.LastName" />
             <MudTextField InputType="InputType.Password" Label="Password" HelperText="Required" @bind-Value="@_model.Password" />
+            <MudTextField InputType="InputType.Password" Label="Confirm Password" HelperText="Required" @bind-Value="@_model.ConfirmPassword" />
 
             <ValidationSummary />
 
@@ -22,11 +28,12 @@
         </MudCardContent>
 
         <MudCardActions>
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Disabled="_isBusy">Login</MudButton>
-            <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Class="ml-1" Disabled="_isBusy" OnClick="RedirectToRegister">Create Account</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="_isBusy">Create Account</MudButton>
+            <MudButton  Variant="Variant.Outlined" Color="Color.Secondary" OnClick="RedirectToLogin" Class="ml-1" Disabled="_isBusy">Login</MudButton>
         </MudCardActions>
     </MudCard>
 </EditForm>
+
 
 @code {
 
