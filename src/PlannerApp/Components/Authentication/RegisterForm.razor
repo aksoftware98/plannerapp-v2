@@ -1,7 +1,4 @@
-﻿@page "/authentication/register"
-@namespace PlannerApp.Components
-
-
+﻿@namespace PlannerApp.Components
 
 <EditForm Model="_model" OnValidSubmit="RegisterUserAsync">
     <FluentValidationValidator />
@@ -28,7 +25,7 @@
         </MudCardContent>
 
         <MudCardActions>
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="_isBusy">Create Account</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Disabled="_isBusy">Create Account</MudButton>
             <MudButton  Variant="Variant.Outlined" Color="Color.Secondary" OnClick="RedirectToLogin" Class="ml-1" Disabled="_isBusy">Login</MudButton>
         </MudCardActions>
     </MudCard>
