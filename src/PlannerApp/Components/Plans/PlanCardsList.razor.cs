@@ -19,6 +19,7 @@ using PlannerApp.Components;
 using MudBlazor;
 using Blazored.FluentValidation;
 using PlannerApp.Shared.Models;
+using System.IO;
 
 namespace PlannerApp.Components
 {
@@ -37,10 +38,15 @@ namespace PlannerApp.Components
 
         protected async override Task OnInitializedAsync()
         {
-            _isBusy = true;
-            _result = await FetchPlans?.Invoke(_query, _pageNumber, _pageSize);
-            _isBusy = false; 
+            await GetPlansAsync();
         }
 
+        private async Task GetPlansAsync(int pageNumber = 1)
+        {
+            _pageNumber = pageNumber;
+            _isBusy = true;
+            _result = await FetchPlans?.Invoke(_query, _pageNumber, _pageSize);
+            _isBusy = false;
+        }
     }
 }
