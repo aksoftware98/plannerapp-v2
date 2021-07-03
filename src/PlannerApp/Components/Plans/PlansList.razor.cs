@@ -64,6 +64,21 @@ namespace PlannerApp.Components
             return null;
         }
 
+        #region View Toggler
+        private bool _isCardsViewEnabled = true;
+
+        private void SetCardsView()
+        {
+            _isCardsViewEnabled = true;
+        }
+
+        private void SetTableView()
+        {
+            _isCardsViewEnabled = false;
+        }
+
+        #endregion 
+
 
     }
 }
