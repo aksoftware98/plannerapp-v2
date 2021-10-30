@@ -13,6 +13,12 @@
             Icon="@Icons.Filled.Image"
             Label="Load picture"
             for="fileInput" />
+
+    @if (_isEditMode)
+    {
+        <img src="@_model.CoverUrl" style="width:75%;" class="m-2" />
+    }
+
     @if (_stream != null)
     {
         <MudText Typo="Typo.subtitle2">@_fileName</MudText>

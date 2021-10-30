@@ -71,6 +71,22 @@ namespace PlaneerApp.Client.Services
             }
         }
 
+        public async Task<ApiResponse<PlanDetail>> GetByIdAsync(string id)
+        {
+            var response = await _httpClient.GetAsync($"/api/v2/plans/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<ApiResponse<PlanDetail>>();
+                return result;
+            }
+            else
+            {
+                var errorResponse = await response.Content.ReadFromJsonAsync<ApiErrorResponse>();
+                throw new ApiException(errorResponse, response.StatusCode);
+            }
+
+        }
+
 
         private HttpContent PreparePlanForm(PlanDetail model, FormFile coverFile, bool isUpdate)
         {

@@ -32,13 +32,24 @@ namespace PlannerApp.Components
         public IPlansService PlansService { get; set; }
 
         [Inject]
-        public NavigationManager Navigation {  get; set; }
+        public NavigationManager Navigation { get; set; }
+
+        [Parameter]
+        public string Id { get; set; }
+
+        private bool _isEditMode => Id != null;
 
         private PlanDetail _model = new PlanDetail();
         private bool _isBusy = false;
         private Stream _stream = null;
         private string _fileName = string.Empty;
-        private string _errorMessage = string.Empty; 
+        private string _errorMessage = string.Empty;
+
+        protected override async Task OnInitializedAsync()
+        {
+            if (_isEditMode)
+                await FetchPlanByIdAsync();
+        }
 
         private async Task SubmitFormAsync()
         {
@@ -50,7 +61,10 @@ namespace PlannerApp.Components
                 if (_stream != null)
                     formFile = new FormFile(_stream, _fileName);
 
-                var result = await PlansService.CreateAsync(_model, formFile);
+                if (_isEditMode)
+                    await PlansService.EditAsync(_model, formFile);
+                else
+                    await PlansService.CreateAsync(_model, formFile);
                 // Success 
                 Navigation.NavigateTo("/plans");
             }
@@ -67,6 +81,26 @@ namespace PlannerApp.Components
             _isBusy = false;
         }
 
+        private async Task FetchPlanByIdAsync()
+        {
+            _isBusy = true;
+            try
+            {
+                var result = await PlansService.GetByIdAsync(Id);
+                _model = result.Value;
+            }
+            catch (ApiException ex)
+            {
+                _errorMessage = ex.ApiErrorResponse.Message;
+            }
+            catch (Exception ex)
+            {
+                // TODO: Log the error 
+                _errorMessage = ex.Message;
+            }
+            _isBusy = false;
+        }
+
         private async Task OnChooseFileAsync(InputFileChangeEventArgs e)
         {
             _errorMessage = string.Empty;
@@ -76,17 +110,17 @@ namespace PlannerApp.Components
                 if (file.Size >= 2097152)
                 {
                     _errorMessage = "The file must be equal or less than 2MB";
-                    return; 
+                    return;
                 }
 
                 string[] allowedExtensions = new[] { ".jpg", ".png", ".bmp", ".svg" };
 
-                string extension = Path.GetExtension(file.Name).ToLower(); 
+                string extension = Path.GetExtension(file.Name).ToLower();
 
                 if (!allowedExtensions.Contains(extension))
                 {
                     _errorMessage = "Please choose a valid image file";
-                    return; 
+                    return;
                 }
 
                 using (var stream = file.OpenReadStream(2097152))
@@ -95,7 +129,7 @@ namespace PlannerApp.Components
                     await stream.ReadAsync(buffer, 0, (int)file.Size);
                     _stream = new MemoryStream(buffer);
                     _stream.Position = 0;
-                    _fileName = file.Name; 
+                    _fileName = file.Name;
                 }
             }
         }

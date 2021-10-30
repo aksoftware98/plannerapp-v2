@@ -46,7 +46,7 @@ else
             foreach (var plan in _result.Records)
             {
                 <MudItem sm="12" md="4" lg="3">
-                    <PlanCard PlanSummary="plan" />
+                    <PlanCard PlanSummary="plan" OnEditClicked="() => EditPlan(plan)"/>
                 </MudItem>
             }
         }
