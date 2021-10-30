@@ -37,6 +37,9 @@ namespace PlannerApp.Components
         [Parameter]
         public Func<string, int, int, Task<PagedList<PlanSummary>>> FetchPlans { get; set; }
 
+        [Parameter]
+        public EventCallback<PlanSummary> OnEditClicked { get; set; }
+
         private PagedList<PlanSummary> _result = new();
 
         protected async override Task OnInitializedAsync()
@@ -52,9 +55,6 @@ namespace PlannerApp.Components
             _isBusy = false;
         }
 
-        private void EditPlan(PlanSummary plan)
-        {
-            Navigation.NavigateTo($"/plans/form/{plan.Id}");
-        }
+      
     }
 }
