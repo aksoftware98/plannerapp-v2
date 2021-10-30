@@ -87,6 +87,15 @@ namespace PlaneerApp.Client.Services
 
         }
 
+        public async Task DeleteAsync(string id)
+        {
+            var response = await _httpClient.DeleteAsync($"/api/v2/plans/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorResponse = await response.Content.ReadFromJsonAsync<ApiErrorResponse>();
+                throw new ApiException(errorResponse, response.StatusCode);
+            }
+        }
 
         private HttpContent PreparePlanForm(PlanDetail model, FormFile coverFile, bool isUpdate)
         {
