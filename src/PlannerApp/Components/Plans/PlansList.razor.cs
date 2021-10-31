@@ -33,6 +33,9 @@ namespace PlannerApp.Components
         [Inject]
         public NavigationManager Navigation { get; set; }
 
+        [Inject]
+        public IDialogService DialogService {  get; set; }
+
         private bool _isBusy = false;
         private string _errorMessage = string.Empty;
         private int _pageNumber = 1;
@@ -63,7 +66,7 @@ namespace PlannerApp.Components
                 // TODO: Log this error 
                 _errorMessage = ex.Message;
             }
-            _isBusy = false; 
+            _isBusy = false;
             return null;
         }
 
@@ -86,6 +89,27 @@ namespace PlannerApp.Components
         private void EditPlan(PlanSummary plan)
         {
             Navigation.NavigateTo($"/plans/form/{plan.Id}");
+        }
+        #endregion
+
+        #region Delete
+        private async Task DeletePlanAsync(PlanSummary plan)
+        {
+            var parameters = new DialogParameters();
+            parameters.Add("ContentText", $"Do you really want to delete the plan '{plan.Title}'?");
+            parameters.Add("ButtonText", "Delete");
+            parameters.Add("Color", Color.Error);
+
+            var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
+
+            var dialog = DialogService.Show<ConfirmationDialog>("Delete", parameters, options);
+            var confirmationResult = await dialog.Result; 
+
+            if (!confirmationResult.Cancelled)
+            {
+                // Confirmed to delete
+                await PlansService.DeleteAsync(plan.Id);
+            }
         }
         #endregion 
 
