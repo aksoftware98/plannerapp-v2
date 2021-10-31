@@ -20,6 +20,7 @@ using MudBlazor;
 using Blazored.FluentValidation;
 using PlaneerApp.Client.Services.Interfaces;
 using PlannerApp.Shared.Models;
+using AKSoftware.Blazor.Utilities;
 
 namespace PlannerApp.Components
 {
@@ -39,7 +40,16 @@ namespace PlannerApp.Components
         public EventCallback<PlanSummary> OnEditClicked { get; set; }
 
         private string _query = string.Empty;
-        private MudTable<PlanSummary> _table; 
+        private MudTable<PlanSummary> _table;
+
+        protected override void OnInitialized()
+        {
+            MessagingCenter.Subscribe<PlansList, PlanSummary>(this, "plan_deleted", async (sender, args) =>
+            {
+                await _table.ReloadServerData();
+                StateHasChanged(); 
+            });
+        }
 
         private async Task<TableData<PlanSummary>> ServerReloadAsync(TableState state)
         {
