@@ -9,11 +9,13 @@
 @if (_isCardsViewEnabled)
 {
     <PlanCardsList FetchPlans="GetPlansAsync" 
+                   OnViewClicked="ViewPlan"
                    OnEditClicked="EditPlan" 
                    OnDeleteClicked="DeletePlanAsync"/>
 }
 else
 {
-    <PlansTable OnEditClicked="EditPlan" 
+    <PlansTable OnViewClicked="ViewPlan"
+                OnEditClicked="EditPlan" 
                 OnDeleteClicked="DeletePlanAsync" />
 }

@@ -1,0 +1,59 @@
+﻿@namespace PlannerApp.Components
+
+<MudDialog>
+	<TitleContent>
+			@if (_isBusy)
+			{
+					<MudText Typo="Typo.h6">Loading plan details ... </MudText>
+			}
+			else
+			{
+					<MudText Typo="Typo.h6">_plan?.Title</MudText>
+			}
+	
+	</TitleContent>
+	<DialogContent>
+		<MudGrid>
+			<MudItem sm="12" md="6">
+				@if (_isBusy)
+				{
+
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Rectangle" 
+								 Height="40px" Style="min-width:250px"/>
+
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px"/>
+
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px"/>
+
+				}
+				else
+				{
+					<!-- Plan details go here -->
+					<img style="width:100%;border-radius:5px" src="@_plan.CoverUrl" />
+					<MudText Typo="Typo.body1">@_plan?.Description</MudText>
+				}
+
+			</MudItem>
+			<MudItem sm="12" md="6">
+				<!-- Items go here -->
+				@if (_isBusy)
+				{
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px"/>
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px"/>
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px"/>
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px"/>
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px"/>
+				}
+				else
+				{
+					<!-- Plan's items go here -->
+					
+				}
+			</MudItem>
+		</MudGrid>
+	</DialogContent>
+	<DialogActions>
+		<MudButton OnClick="Close">Close</MudButton>
+	</DialogActions>
+</MudDialog>
+
