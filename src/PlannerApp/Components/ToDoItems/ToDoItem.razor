@@ -1,43 +1,52 @@
-﻿@namespace PlannerApp.Components 
+﻿@namespace PlannerApp.Components
 
 <MudPaper Elevation="1" Class="mt-2 px-3">
-<div class="d-flex flex-row align-center">
-	<MudCheckBox @bind-Checked="@_isChecked" Color="Color.Primary" Class="flex-grow-0 flex-shrink-0 mr-2"></MudCheckBox>
+	<div class="d-flex flex-row align-center">
+		<MudCheckBox @bind-Checked="@_isChecked" Color="Color.Primary" Class="flex-grow-0 flex-shrink-0 mr-2"></MudCheckBox>
 
-	@if (_isEditMode)
+		@if (_isEditMode)
 		{
 
-			<MudTextField @bind-Value="_description" Label="Outlined" Variant="Variant.Outlined" Margin="Margin.Dense" Class="flex-grow-1 flex-shrink-0 mr-2" ></MudTextField>
+			<MudTextField @bind-Value="_description" Label="Description" Variant="Variant.Outlined" Margin="Margin.Dense" Class="flex-grow-1 flex-shrink-0 mr-2"
+					  Error="@(!string.IsNullOrEmpty(_errorMessage))"
+					  ErrorText="@_errorMessage"></MudTextField>
 
-			<MudIconButton Icon="@Icons.Material.Filled.Cancel" Color="Color.Primary" Class="flex-grow-0 flex-shrink-0 mr-1" 
-						   OnClick="() => ToggleEditMode(true)" />
+			<MudIconButton Icon="@Icons.Material.Filled.Cancel" Color="Color.Primary" Class="flex-grow-0 flex-shrink-0 mr-1"
+					   OnClick="() => ToggleEditMode(true)" />
 
-			<MudIconButton Icon="@Icons.Material.Filled.Save" Color="Color.Success" Class="flex-grow-0 flex-shrink-0 mr-2"
-						   />
+			@if (_isBusy)
+			{
+				<MudProgressCircular Color="Color.Primary" Indeterminate="true" Class="flex-grow-0 flex-shrink-0 mr-2" />
+			}
+			else
+			{
+				<MudIconButton Icon="@Icons.Material.Filled.Save" Color="Color.Success" Class="flex-grow-0 flex-shrink-0 mr-2"
+					   OnClick="EditItemAsync" />
+			}
 		}
 		else
 		{
-				<MudText Typo="Typo.body1" Class="flex-grow-1 flex-shrink-0 mr-2" 
-						 Style="cursor:pointer"
-						 @onclick="() => ToggleEditMode(false)">
-							@Item.Description
+			<MudText Typo="Typo.body1" Class="flex-grow-1 flex-shrink-0 mr-2"
+				 Style="cursor:pointer"
+				 @onclick="() => ToggleEditMode(false)">
+				@Item.Description
 			</MudText>
 
 			@if (_isBusy)
 			{
-				<MudProgressCircular Color="Color.Primary" Indeterminate="true" Class="flex-grow-0 flex-shrink-0 mr-2"/>
+				<MudProgressCircular Color="Color.Primary" Indeterminate="true" Class="flex-grow-0 flex-shrink-0 mr-2" />
 			}
 			else
 			{
-				<MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Class="flex-grow-0 flex-shrink-0 mr-2" 
-						    OnClick="RemoveItemAsync"/>
+				<MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Class="flex-grow-0 flex-shrink-0 mr-2"
+					   OnClick="RemoveItemAsync" />
 			}
 
 		}
-	
 
 
-	
-	
-</div>
+
+
+
+	</div>
 </MudPaper>
