@@ -47,12 +47,12 @@
 				else
 				{
 					<!-- Plan's items go here -->
-					<ToDoItem />
-					<ToDoItem />
-					<ToDoItem />
-					<ToDoItem />
-					<ToDoItem />
-					<ToDoItem />
+					<CreateToDoItemForm PlanId="@PlanId" OnToDoItemAdded="OnToDoItemAddedCallback" />
+
+					@foreach(var item in _items)
+					{
+						<ToDoItem Item="item" OnItemDeleted="OnToDoItemDeletedCallback" />
+					}
 				}
 			</MudItem>
 		</MudGrid>

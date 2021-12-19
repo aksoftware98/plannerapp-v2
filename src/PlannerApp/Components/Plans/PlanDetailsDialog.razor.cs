@@ -39,7 +39,7 @@ namespace PlannerApp.Components
         private PlanDetail _plan;
         private bool _isBusy;
         private string _errorMessage = string.Empty;
-
+        private List<ToDoItemDetail> _items = new();
         private void Close()
         {
             MudDialog.Cancel();
@@ -65,6 +65,7 @@ namespace PlannerApp.Components
             {
                 var result = await PlansService.GetByIdAsync(PlanId);
                 _plan = result.Value;
+                _items = _plan.ToDoItems;
                 StateHasChanged();
             }
             catch (ApiException ex)
@@ -76,6 +77,16 @@ namespace PlannerApp.Components
                 // TODO: Log this error 
             }
             _isBusy = false;
+        }
+
+        private void OnToDoItemAddedCallback(ToDoItemDetail todoItem)
+        {
+            _items.Add(todoItem);
+        }
+
+        private void OnToDoItemDeletedCallback(ToDoItemDetail todoItem)
+        {
+            _items.Remove(todoItem);
         }
 
     }

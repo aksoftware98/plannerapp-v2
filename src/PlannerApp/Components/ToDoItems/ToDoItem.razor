@@ -9,20 +9,30 @@
 
 			<MudTextField @bind-Value="_description" Label="Outlined" Variant="Variant.Outlined" Margin="Margin.Dense" Class="flex-grow-1 flex-shrink-0 mr-2" ></MudTextField>
 
-			<MudIconButton Icon="@Icons.Material.Filled.Cancel" Color="Color.Primary" Class="flex-grow-0 flex-shrink-0 mr-2"></MudIconButton>
+			<MudIconButton Icon="@Icons.Material.Filled.Cancel" Color="Color.Primary" Class="flex-grow-0 flex-shrink-0 mr-1" 
+						   OnClick="() => ToggleEditMode(true)" />
 
 			<MudIconButton Icon="@Icons.Material.Filled.Save" Color="Color.Success" Class="flex-grow-0 flex-shrink-0 mr-2"
-						   OnClick="() => _isEditMode = false"></MudIconButton>
+						   />
 		}
 		else
 		{
 				<MudText Typo="Typo.body1" Class="flex-grow-1 flex-shrink-0 mr-2" 
 						 Style="cursor:pointer"
-						 @onclick="() => _isEditMode = true">
-							Studying Blazor with .NET 6.0 And ASP.NET Core
+						 @onclick="() => ToggleEditMode(false)">
+							@Item.Description
 			</MudText>
 
-			<MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Class="flex-grow-0 flex-shrink-0 mr-2"></MudIconButton>
+			@if (_isBusy)
+			{
+				<MudProgressCircular Color="Color.Primary" Indeterminate="true" Class="flex-grow-0 flex-shrink-0 mr-2"/>
+			}
+			else
+			{
+				<MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Class="flex-grow-0 flex-shrink-0 mr-2" 
+						    OnClick="RemoveItemAsync"/>
+			}
+
 		}
 	
 

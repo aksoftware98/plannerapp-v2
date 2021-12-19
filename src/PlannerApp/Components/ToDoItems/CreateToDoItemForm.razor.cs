@@ -18,59 +18,50 @@ using PlannerApp.Shared;
 using PlannerApp.Components;
 using MudBlazor;
 using Blazored.FluentValidation;
-using PlannerApp.Shared.Models;
 using PlaneerApp.Client.Services.Interfaces;
 using PlaneerApp.Client.Services.Exceptions;
+using PlannerApp.Shared.Models;
 
 namespace PlannerApp.Components
 {
-    public partial class ToDoItem
+    public partial class CreateToDoItemForm
     {
+
         [Inject]
         public IToDoItemsService ToDoItemsService { get; set; }
 
         [Parameter]
-        public ToDoItemDetail Item { get; set; }
+        public string PlanId { get; set; }
 
         [Parameter]
-        public EventCallback<ToDoItemDetail> OnItemDeleted { get; set; }
+        public EventCallback<ToDoItemDetail> OnToDoItemAdded { get; set; }
 
-        private bool _isChecked = true;
+        private bool _isBusy = false; 
+        private string _description { get; set; }
+        private string _errorMessage = string.Empty;
 
-        private bool _isEditMode = false;
-        private bool _isBusy = false;
-        private string _description = String.Empty;
-
-        private void ToggleEditMode(bool isCancel)
+        private async Task AddToItemAsync()
         {
-            if (_isEditMode)
-            {
-                _isEditMode = false;
-                _description = isCancel ? Item.Description : _description;
-            }
-            else
-            {
-                _isEditMode = true;
-                _description = Item.Description;
-            }
-          
-        }
-
-
-        private async Task RemoveItemAsync()
-        {
+            _errorMessage = string.Empty;
             try
             {
+                if (string.IsNullOrWhiteSpace(_description))
+                {
+                    _errorMessage = "Description is required";
+                    return;
+                }
+
                 _isBusy = true;
                 // Call the API to add the item 
-                await ToDoItemsService.DeleteAsync(Item.Id);
-              
+                var result = await ToDoItemsService.CreateAsync(_description, PlanId);
+                _description = String.Empty;
+
                 // Notify the parent about the newly added item 
-                await OnItemDeleted.InvokeAsync(Item);
+                await OnToDoItemAdded.InvokeAsync(result.Value);
             }
             catch (ApiException ex)
             {
-                // TODO: Handle errors globally 
+                _errorMessage = ex.Message;
             }
             catch (Exception ex)
             {
