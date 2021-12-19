@@ -1,0 +1,33 @@
+﻿@namespace PlannerApp.Components 
+
+<MudPaper Elevation="1" Class="mt-2 px-3">
+<div class="d-flex flex-row align-center">
+	<MudCheckBox @bind-Checked="@_isChecked" Color="Color.Primary" Class="flex-grow-0 flex-shrink-0 mr-2"></MudCheckBox>
+
+	@if (_isEditMode)
+		{
+
+			<MudTextField @bind-Value="_description" Label="Outlined" Variant="Variant.Outlined" Margin="Margin.Dense" Class="flex-grow-1 flex-shrink-0 mr-2" ></MudTextField>
+
+			<MudIconButton Icon="@Icons.Material.Filled.Cancel" Color="Color.Primary" Class="flex-grow-0 flex-shrink-0 mr-2"></MudIconButton>
+
+			<MudIconButton Icon="@Icons.Material.Filled.Save" Color="Color.Success" Class="flex-grow-0 flex-shrink-0 mr-2"
+						   OnClick="() => _isEditMode = false"></MudIconButton>
+		}
+		else
+		{
+				<MudText Typo="Typo.body1" Class="flex-grow-1 flex-shrink-0 mr-2" 
+						 Style="cursor:pointer"
+						 @onclick="() => _isEditMode = true">
+							Studying Blazor with .NET 6.0 And ASP.NET Core
+			</MudText>
+
+			<MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Class="flex-grow-0 flex-shrink-0 mr-2"></MudIconButton>
+		}
+	
+
+
+	
+	
+</div>
+</MudPaper>
