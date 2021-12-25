@@ -2,7 +2,7 @@
 
 <MudPaper Elevation="1" Class="mt-2 px-3">
 	<div class="d-flex flex-row align-center">
-		<MudCheckBox @bind-Checked="@_isChecked" Color="Color.Primary" Class="flex-grow-0 flex-shrink-0 mr-2"></MudCheckBox>
+		<MudCheckBox T="bool" Checked="@_isChecked" CheckedChanged="ToggleItemAsync" Color="Color.Primary" Class="flex-grow-0 flex-shrink-0 mr-2"></MudCheckBox>
 
 		@if (_isEditMode)
 		{
@@ -27,7 +27,7 @@
 		else
 		{
 			<MudText Typo="Typo.body1" Class="flex-grow-1 flex-shrink-0 mr-2"
-				 Style="cursor:pointer"
+				 Style="@_descriptionStyle"
 				 @onclick="() => ToggleEditMode(false)">
 				@Item.Description
 			</MudText>

@@ -43,7 +43,13 @@ namespace PlannerApp.Components
         private bool _isEditMode = false;
         private bool _isBusy = false;
         private string _description = String.Empty;
-        private string _errorMessage = string.Empty; 
+        private string _errorMessage = string.Empty;
+        private string _descriptionStyle => $"cursor:pointer;{(!_isChecked ? "" : "text-decoration: line-through")}";
+
+        protected override void OnInitialized()
+        {
+            _isChecked = Item.IsDone;
+        }
 
         private void ToggleEditMode(bool isCancel)
         {
@@ -93,6 +99,7 @@ namespace PlannerApp.Components
                     _errorMessage = "Description is required";
                     return; 
                 }
+
                 _isBusy = true;
                 // Call the API to add the item 
                 var result = await ToDoItemsService.EditAsync(Item.Id, _description, Item.PlanId);
@@ -100,6 +107,31 @@ namespace PlannerApp.Components
 
                 // Notify the parent about the newly added item 
                 await OnItemEdited.InvokeAsync(result.Value);
+            }
+            catch (ApiException ex)
+            {
+                _errorMessage = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                // TODO: Handle errors globally 
+            }
+            _isBusy = false;
+        }
+
+        private async Task ToggleItemAsync(bool value)
+        {
+            _errorMessage = String.Empty;
+            try
+            {
+                _isBusy = true;
+                // Call the API to add the item 
+                await ToDoItemsService.ToggleAsync(Item.Id);
+                Item.IsDone = !Item.IsDone;
+                _isChecked = Item.IsDone; 
+
+                // Notify the parent about the newly added item 
+                await OnItemEdited.InvokeAsync(Item);
             }
             catch (ApiException ex)
             {
