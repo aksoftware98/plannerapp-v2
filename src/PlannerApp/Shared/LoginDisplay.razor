@@ -6,7 +6,7 @@
 
 <AuthorizeView>
     <Authorized>
-        <MudMenu Icon="@Icons.Filled.Person" Color="Color.Secondary" Direction="Direction.Right" OffsetY="true">
+        <MudMenu Icon="@Icons.Filled.Person" Color="Color.Default" Direction="Direction.Right" OffsetY="true">
             <MudMenuItem>Welcome @context.User.FindFirst(ClaimTypes.GivenName).Value</MudMenuItem>
             <MudMenuItem OnClick="LogOutAsync">LogOut</MudMenuItem>
         </MudMenu>

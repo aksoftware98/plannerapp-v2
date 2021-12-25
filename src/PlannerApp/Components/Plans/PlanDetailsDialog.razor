@@ -2,15 +2,9 @@
 
 <MudDialog>
 	<TitleContent>
-			@if (_isBusy)
-			{
-					<MudText Typo="Typo.h6">Loading plan details ... </MudText>
-			}
-			else
-			{
-					<MudText Typo="Typo.h6">_plan?.Title</MudText>
-			}
-	
+
+		<MudText Typo="Typo.h6">Plan Details</MudText>
+
 	</TitleContent>
 	<DialogContent>
 		<MudGrid>
@@ -18,16 +12,19 @@
 				@if (_isBusy)
 				{
 
-					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Rectangle" 
-								 Height="40px" Style="min-width:250px"/>
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:200px" />
 
-					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px"/>
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Rectangle"
+							 Height="40px" Style="min-width:200px" />
 
-					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px"/>
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:200px" />
+
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:200px" />
 
 				}
 				else
 				{
+					<MudText Typo="Typo.subtitle1">@_plan?.Title</MudText>
 					<!-- Plan details go here -->
 					<img style="width:100%;border-radius:5px" src="@_plan.CoverUrl" />
 					<MudText Typo="Typo.body1">@_plan?.Description</MudText>
@@ -38,22 +35,23 @@
 				<!-- Items go here -->
 				@if (_isBusy)
 				{
-					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px"/>
-					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px"/>
-					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px"/>
-					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px"/>
-					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px"/>
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px" />
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px" />
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px" />
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px" />
+					<MudSkeleton Animation="Animation.Wave" SkeletonType="SkeletonType.Text" Style="min-width:250px" />
 				}
 				else
 				{
 					<!-- Plan's items go here -->
 					<CreateToDoItemForm PlanId="@PlanId" OnToDoItemAdded="OnToDoItemAddedCallback" />
-
-					@foreach(var item in _items)
-					{
-						<ToDoItem Item="item" OnItemDeleted="OnToDoItemDeletedCallback"
-								  OnItemEdited="OnToDoItemEditedCallback"/>
-					}
+					<div class="items-container">
+						@foreach (var item in _items)
+						{
+							<ToDoItem Item="item" OnItemDeleted="OnToDoItemDeletedCallback"
+							  OnItemEdited="OnToDoItemEditedCallback" />
+						}
+					</div>
 				}
 			</MudItem>
 		</MudGrid>
