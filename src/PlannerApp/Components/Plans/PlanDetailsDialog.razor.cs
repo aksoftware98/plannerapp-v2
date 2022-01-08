@@ -36,6 +36,9 @@ namespace PlannerApp.Components
         [Parameter]
         public string PlanId { get; set; }
 
+        [CascadingParameter]
+        public Error Error { get; set; }
+
         private PlanDetail _plan;
         private bool _isBusy;
         private string _errorMessage = string.Empty;
@@ -68,13 +71,9 @@ namespace PlannerApp.Components
                 _items = _plan.ToDoItems;
                 StateHasChanged();
             }
-            catch (ApiException ex)
-            {
-                // TODO 
-            }
             catch (Exception ex)
             {
-                // TODO: Log this error 
+                Error.HandleError(ex);
             }
             _isBusy = false;
         }

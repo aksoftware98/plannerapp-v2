@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using PlaneerApp.Client.Services.Exceptions;
 using PlaneerApp.Client.Services.Interfaces;
+using PlannerApp.Shared;
 using PlannerApp.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,9 @@ namespace PlannerApp.Components
 
         [Inject]
         public NavigationManager Navigation { get; set; }
+
+        [CascadingParameter]
+        public Error Error { get; set; }
 
         private RegisterRequest _model = new();
         private bool _isBusy = false;
@@ -41,8 +45,7 @@ namespace PlannerApp.Components
             }
             catch(Exception ex)
             {
-                // Handle errors 
-                _errorMessage = ex.Message;
+                Error.HandleError(ex);
             }
 
             _isBusy = false;

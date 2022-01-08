@@ -37,6 +37,9 @@ namespace PlannerApp.Components
         [Inject]
         public IDialogService DialogService {  get; set; }
 
+        [CascadingParameter]
+        public Error Error { get; set; }
+
         private bool _isBusy = false;
         private string _errorMessage = string.Empty;
         private int _pageNumber = 1;
@@ -64,8 +67,7 @@ namespace PlannerApp.Components
             }
             catch (Exception ex)
             {
-                // TODO: Log this error 
-                _errorMessage = ex.Message;
+                Error.HandleError(ex);
             }
             _isBusy = false;
             return null;

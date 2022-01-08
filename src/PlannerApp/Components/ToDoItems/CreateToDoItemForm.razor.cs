@@ -36,6 +36,9 @@ namespace PlannerApp.Components
         [Parameter]
         public EventCallback<ToDoItemDetail> OnToDoItemAdded { get; set; }
 
+        [CascadingParameter]
+        public Error Error { get; set; }
+
         private bool _isBusy = false; 
         private string _description { get; set; }
         private string _errorMessage = string.Empty;
@@ -65,7 +68,7 @@ namespace PlannerApp.Components
             }
             catch (Exception ex)
             {
-                // TODO: Handle errors globally 
+                Error.HandleError(ex);
             }
             _isBusy = false;
         }

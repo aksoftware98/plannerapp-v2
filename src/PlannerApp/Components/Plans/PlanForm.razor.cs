@@ -37,6 +37,8 @@ namespace PlannerApp.Components
         [Parameter]
         public string Id { get; set; }
 
+        [CascadingParameter]
+        public Error Error { get; set; }
         private bool _isEditMode => Id != null;
 
         private PlanDetail _model = new PlanDetail();
@@ -74,8 +76,7 @@ namespace PlannerApp.Components
             }
             catch (Exception ex)
             {
-                // TODO: Log the error 
-                _errorMessage = ex.Message;
+                Error.HandleError(ex);
             }
 
             _isBusy = false;
@@ -95,8 +96,7 @@ namespace PlannerApp.Components
             }
             catch (Exception ex)
             {
-                // TODO: Log the error 
-                _errorMessage = ex.Message;
+                Error.HandleError(ex);
             }
             _isBusy = false;
         }

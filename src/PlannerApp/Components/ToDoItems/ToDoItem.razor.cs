@@ -38,6 +38,9 @@ namespace PlannerApp.Components
         [Parameter]
         public EventCallback<ToDoItemDetail> OnItemEdited { get; set; }
 
+        [CascadingParameter]
+        public Error Error { get; set; }
+
         private bool _isChecked = true;
 
         private bool _isEditMode = false;
@@ -78,13 +81,9 @@ namespace PlannerApp.Components
                 // Notify the parent about the newly added item 
                 await OnItemDeleted.InvokeAsync(Item);
             }
-            catch (ApiException ex)
-            {
-                // TODO: Handle errors globally 
-            }
             catch (Exception ex)
             {
-                // TODO: Handle errors globally 
+                Error.HandleError(ex);
             }
             _isBusy = false;
         }
@@ -114,7 +113,7 @@ namespace PlannerApp.Components
             }
             catch (Exception ex)
             {
-                // TODO: Handle errors globally 
+                Error.HandleError(ex);
             }
             _isBusy = false;
         }
@@ -139,7 +138,7 @@ namespace PlannerApp.Components
             }
             catch (Exception ex)
             {
-                // TODO: Handle errors globally 
+                Error.HandleError(ex);
             }
             _isBusy = false;
         }

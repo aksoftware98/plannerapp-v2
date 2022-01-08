@@ -39,6 +39,9 @@ namespace PlannerApp.Components
         [Parameter]
         public EventCallback<PlanSummary> OnEditClicked { get; set; }
 
+        [CascadingParameter]
+        public Error Error { get; set; }
+
         private string _query = string.Empty;
         private MudTable<PlanSummary> _table;
 
@@ -53,12 +56,25 @@ namespace PlannerApp.Components
 
         private async Task<TableData<PlanSummary>> ServerReloadAsync(TableState state)
         {
-            var result = await PlansService.GetPlansAsync(_query, state.Page, state.PageSize);
+            try
+            {
+                var result = await PlansService.GetPlansAsync(_query, state.Page, state.PageSize);
+
+                return new TableData<PlanSummary>
+                {
+                    Items = result.Value.Records,
+                    TotalItems = result.Value.ItemsCount
+                };
+            }
+            catch (Exception ex)
+            {
+                Error.HandleError(ex);
+            }
 
             return new TableData<PlanSummary>
             {
-                Items = result.Value.Records,
-                TotalItems = result.Value.ItemsCount
+                Items = new List<PlanSummary>(),
+                TotalItems = 0
             };
         }
 
