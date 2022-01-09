@@ -1,11 +1,13 @@
 ﻿@namespace PlannerApp.Components 
+@using AKSoftware.Localization.MultiLanguages.Blazor
+@inject ILanguageContainerService Language
 
 <MudDialog>
     <DialogContent>
         <MudText>@ContentText</MudText>
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton OnClick="Cancel">@Language["Cancel"]</MudButton>
         <MudButton Color="@Color" Variant="Variant.Filled" OnClick="Submit">@ButtonText</MudButton>
     </DialogActions>
 </MudDialog>
@@ -21,4 +23,10 @@
 
     void Submit() => MudDialog.Close(DialogResult.Ok(true));
     void Cancel() => MudDialog.Cancel();
+
+    protected override void OnInitialized()
+    {
+        Language.InitLocalizedComponent(this);
+    }
+
 }

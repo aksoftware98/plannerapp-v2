@@ -1,0 +1,32 @@
+﻿GeneralError: Something went wrong!, please try again later
+Home: Home
+Plans: Plans
+AddPlan: Add Plan 
+About: About
+WelcomeTo: Welcome to
+Email: Email
+Required: Required
+Password: Password
+ConfirmPassword: Confirm Password
+Login: Login
+Register: Create Account
+FirstName: First Name
+LastName: Last Name
+Cancel: Cancel
+Close: Close
+PlanDetails: Plan Details
+Title: Title
+Description: Description 
+LoadPicture: Load Picture
+Save: Save 
+FileSizeLimitError: The file must be equal or less than 2MB
+InvalidImageFile: Please choose a valid image file
+Cover: Cover
+Actions: Actions
+NewItemDescription: New Item Description
+NewItemPlaceholder: Going to the gym
+NewPlanTitle: Create a new plan
+Optional: Optional
+DescriptionRequired: Description is required
+Welcome: Welcome
+Logout: Log out

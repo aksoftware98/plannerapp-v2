@@ -1,17 +1,17 @@
 ﻿@namespace PlannerApp.Components
 
-<MudText Typo="Typo.h6">Create a new Plan</MudText>
+<MudText Typo="Typo.h6">@Language["NewPlanTitle"]</MudText>
 
 <EditForm Model="_model" OnValidSubmit="SubmitFormAsync">
     <FluentValidationValidator />
-    <MudTextField Label="Title" HelperText="Required" @bind-Value="@_model.Title" Variant="Variant.Outlined" />
-    <MudTextField Label="Description" HelperText="Optional" @bind-Value="@_model.Description" Lines="4" Variant="Variant.Outlined" />
+    <MudTextField Label="@Language["Title"]" HelperText="@Language["Required"]" @bind-Value="@_model.Title" Variant="Variant.Outlined" />
+    <MudTextField Label="@Language["Description"]" HelperText="@Language["Optional"]" @bind-Value="@_model.Description" Lines="4" Variant="Variant.Outlined" />
 
     <InputFile id="fileInput" OnChange="OnChooseFileAsync" hidden multiple />
     <MudFab HtmlTag="label"
             Color="Color.Secondary"
             Icon="@Icons.Filled.Image"
-            Label="Load picture"
+            Label="@Language["LoadPicture"]"
             for="fileInput" />
 
     @if (_isEditMode)
@@ -33,7 +33,7 @@
 
     <ValidationSummary />
 
-    <MudButton Color="Color.Primary" Variant="Variant.Filled" ButtonType="ButtonType.Submit" FullWidth="true" Disabled="_isBusy">Save</MudButton>
+    <MudButton Color="Color.Primary" Variant="Variant.Filled" ButtonType="ButtonType.Submit" FullWidth="true" Disabled="_isBusy">@Language["Save"]</MudButton>
 </EditForm>
 
 

@@ -21,6 +21,8 @@ using Blazored.FluentValidation;
 using PlaneerApp.Client.Services.Interfaces;
 using PlaneerApp.Client.Services.Exceptions;
 using PlannerApp.Shared.Models;
+using AKSoftware.Localization.MultiLanguages;
+using AKSoftware.Localization.MultiLanguages.Blazor;
 
 namespace PlannerApp.Components
 {
@@ -39,9 +41,18 @@ namespace PlannerApp.Components
         [CascadingParameter]
         public Error Error { get; set; }
 
+        [Inject]
+        public ILanguageContainerService Language { get; set; }
+
         private bool _isBusy = false; 
         private string _description { get; set; }
         private string _errorMessage = string.Empty;
+
+        protected override void OnInitialized()
+        {
+            Language.InitLocalizedComponent(this);
+        }
+
 
         private async Task AddToItemAsync()
         {
@@ -50,7 +61,7 @@ namespace PlannerApp.Components
             {
                 if (string.IsNullOrWhiteSpace(_description))
                 {
-                    _errorMessage = "Description is required";
+                    _errorMessage = Language["DescriptionRequired"];
                     return;
                 }
 

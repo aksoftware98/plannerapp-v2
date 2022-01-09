@@ -19,34 +19,34 @@ using PlannerApp.Components;
 using MudBlazor;
 using Blazored.FluentValidation;
 using AKSoftware.Localization.MultiLanguages;
-using AKSoftware.Localization.MultiLanguages.Blazor;
+using Blazored.LocalStorage;
+using System.Globalization;
 
 namespace PlannerApp.Shared
 {
-    public partial class Error
+    public partial class LanguageSwitcher
     {
-
-        [Inject]
-        public ISnackbar Snackbar { get; set; }
-
-        [Parameter]
-        public RenderFragment ChildContent { get; set; }
 
         [Inject]
         public ILanguageContainerService Language { get; set; }
 
-        protected override void OnInitialized()
+        [Inject]
+        public ILocalStorageService LocalStorage { get; set; }
+
+        protected override async Task OnInitializedAsync()
         {
-            Language.InitLocalizedComponent(this);
+            if (await LocalStorage.ContainKeyAsync("language"))
+            {
+                string cultureCode = await LocalStorage.GetItemAsStringAsync("language");
+                Language.SetLanguage(CultureInfo.GetCultureInfo(cultureCode));
+            }
         }
 
-        public void HandleError(Exception ex)
+        private async Task ChangeLanguageAsync(string cultureCode)
         {
+            Language.SetLanguage(CultureInfo.GetCultureInfo(cultureCode));
 
-            Snackbar.Add(Language["GeneralError"], Severity.Error);
-
-            // TODO: Log the error, send the server, to application isnights
-            Console.WriteLine($"{ex.Message} - {DateTime.Now}");
+            await LocalStorage.SetItemAsStringAsync("language", cultureCode);
         }
 
     }

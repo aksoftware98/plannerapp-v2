@@ -1,0 +1,32 @@
+GeneralError: Quelque chose s’est mal passé!, veuillez réessayer plus tard
+Home: Domicile
+Plans: Plans
+AddPlan: Ajouter un plan
+About: Environ
+WelcomeTo: Bienvenue sur
+Email: Messagerie électronique
+Required: Obligatoire
+Password: Mot de passe
+ConfirmPassword: Confirmer le mot de passe
+Login: Connectez-vous
+Register: Créer un compte
+FirstName: Prénom
+LastName: Nom
+Cancel: Annuler
+Close: Fermer
+PlanDetails: Détails du plan
+Title: Titre
+Description: Description
+LoadPicture: Charger l’image
+Save: Sauvegarder
+FileSizeLimitError: Le fichier doit être égal ou inférieur à 2 Mo
+InvalidImageFile: Veuillez choisir un fichier image valide
+Cover: Couvrir
+Actions: Actions
+NewItemDescription: Description du nouvel objet
+NewItemPlaceholder: Aller au gymnase
+NewPlanTitle: Créer un nouveau plan
+Optional: Optionnel
+DescriptionRequired: La description est requise
+Welcome: Bienvenue
+Logout: Se déconnecter

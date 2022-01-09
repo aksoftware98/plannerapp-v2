@@ -1,9 +1,21 @@
-﻿<MudNavMenu>
+﻿@using AKSoftware.Localization.MultiLanguages.Blazor
+<MudNavMenu>
     <MudText Typo="Typo.h6" Class="px-4">PlannerApp</MudText>
     <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary">V2.0 by AK Academy</MudText>
     <MudDivider Class="my-2" />
-    <MudNavLink Href="/index">Home</MudNavLink>
-    <MudNavLink Href="/plans">Plans</MudNavLink>
-    <MudNavLink Href="/plans/form">Add Plan</MudNavLink>
-    <MudNavLink Href="/about">About</MudNavLink>
+    <MudNavLink Href="/index">@Language["Home"]</MudNavLink>
+    <MudNavLink Href="/plans">@Language["Plans"]</MudNavLink>
+    <MudNavLink Href="/plans/form">@Language["AddPlan"]</MudNavLink>
+    <MudNavLink Href="/about">@Language["About"]</MudNavLink>
 </MudNavMenu>
+
+@code
+{
+    [Inject]
+    public ILanguageContainerService Language { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Language.InitLocalizedComponent(this);
+    }
+}

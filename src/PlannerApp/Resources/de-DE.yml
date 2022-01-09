@@ -1,0 +1,32 @@
+GeneralError: Etwas ist schief gelaufen!, bitte versuchen Sie es später noch einmal
+Home: Heim
+Plans: Plant
+AddPlan: Plan hinzufügen
+About: Über
+WelcomeTo: Willkommen bei
+Email: E-Mail
+Required: Erforderlich
+Password: Passwort
+ConfirmPassword: Passwort bestätigen
+Login: Einloggen
+Register: Konto erstellen
+FirstName: Vorname
+LastName: Nachname
+Cancel: Abbrechen
+Close: Schließen
+PlanDetails: Plandetails
+Title: Titel
+Description: Beschreibung
+LoadPicture: Bild laden
+Save: Retten
+FileSizeLimitError: Die Datei muss gleich oder kleiner als 2 MB sein
+InvalidImageFile: Bitte wählen Sie eine gültige Bilddatei
+Cover: Deckel
+Actions: Aktionen
+NewItemDescription: Neue Artikelbeschreibung
+NewItemPlaceholder: Ins Fitnessstudio gehen
+NewPlanTitle: Erstellen eines neuen Plans
+Optional: Wahlfrei
+DescriptionRequired: Beschreibung ist erforderlich
+Welcome: Willkommen
+Logout: Ausloggen

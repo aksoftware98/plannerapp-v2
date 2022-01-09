@@ -22,6 +22,8 @@ using PlaneerApp.Client.Services.Interfaces;
 using PlannerApp.Shared.Models;
 using System.IO;
 using PlaneerApp.Client.Services.Exceptions;
+using AKSoftware.Localization.MultiLanguages;
+using AKSoftware.Localization.MultiLanguages.Blazor;
 
 namespace PlannerApp.Components
 {
@@ -33,6 +35,9 @@ namespace PlannerApp.Components
 
         [Inject]
         public NavigationManager Navigation { get; set; }
+
+        [Inject]
+        public ILanguageContainerService Language { get; set; }
 
         [Parameter]
         public string Id { get; set; }
@@ -49,6 +54,7 @@ namespace PlannerApp.Components
 
         protected override async Task OnInitializedAsync()
         {
+            Language.InitLocalizedComponent(this);
             if (_isEditMode)
                 await FetchPlanByIdAsync();
         }
@@ -109,7 +115,7 @@ namespace PlannerApp.Components
             {
                 if (file.Size >= 2097152)
                 {
-                    _errorMessage = "The file must be equal or less than 2MB";
+                    _errorMessage = Language["FileSizeLimitError"];
                     return;
                 }
 
@@ -119,7 +125,7 @@ namespace PlannerApp.Components
 
                 if (!allowedExtensions.Contains(extension))
                 {
-                    _errorMessage = "Please choose a valid image file";
+                    _errorMessage = Language["InvalidImageFile"];
                     return;
                 }
 

@@ -1,0 +1,32 @@
+GeneralError: Algo deu errado!, por favor, tente novamente mais tarde
+Home: Casa
+Plans: Planos
+AddPlan: Adicionar plano
+About: Sobre
+WelcomeTo: Bem-vindo a
+Email: Email
+Required: Necessário
+Password: Senha
+ConfirmPassword: Confirmar senha
+Login: Login
+Register: Criar conta
+FirstName: Nome próprio
+LastName: Apelido
+Cancel: Cancelar
+Close: Fechar
+PlanDetails: Detalhes do plano
+Title: Título
+Description: Descrição
+LoadPicture: Imagem de carga
+Save: Salvar
+FileSizeLimitError: O arquivo deve ser igual ou inferior a 2MB
+InvalidImageFile: Por favor, escolha um arquivo de imagem válido
+Cover: Cobrir
+Actions: Ações
+NewItemDescription: Nova descrição do item
+NewItemPlaceholder: Indo para a academia
+NewPlanTitle: Crie um novo plano
+Optional: Opcional
+DescriptionRequired: Descrição é necessária
+Welcome: Bem-vindo
+Logout: Log out

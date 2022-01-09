@@ -21,6 +21,8 @@ using Blazored.FluentValidation;
 using PlaneerApp.Client.Services.Interfaces;
 using PlannerApp.Shared.Models;
 using PlaneerApp.Client.Services.Exceptions;
+using AKSoftware.Localization.MultiLanguages;
+using AKSoftware.Localization.MultiLanguages.Blazor;
 
 namespace PlannerApp.Components
 {
@@ -32,6 +34,9 @@ namespace PlannerApp.Components
 
         [Inject]
         public IPlansService PlansService { get; set; }
+
+        [Inject]
+        public ILanguageContainerService Language { get; set; }
 
         [Parameter]
         public string PlanId { get; set; }
@@ -58,6 +63,7 @@ namespace PlannerApp.Components
 
         protected async override Task OnInitializedAsync()
         {
+            Language.InitLocalizedComponent(this);
             await FetchPlanAsync();
         }
 

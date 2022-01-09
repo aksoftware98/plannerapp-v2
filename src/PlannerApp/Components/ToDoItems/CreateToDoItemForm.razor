@@ -2,8 +2,8 @@
 
 <div class="d-flex flex-row align-center my-2">
 	<MudTextField @bind-Value="_description" 
-				  Label="New Item Description" 
-				  Placeholder="Going to the gym" 
+				  Label="@Language["NewItemDescription"]" 
+				  Placeholder="@Language["NewItemPlaceholder"]" 
 				  Variant="Variant.Outlined" 
 				  Margin="Margin.Dense" 
 				  Error="@(!string.IsNullOrWhiteSpace(_errorMessage))"
