@@ -6,6 +6,7 @@
 				<AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
 					<NotAuthorized>
 						<h3>You don't have access for this page</h3>
+						<MudLink Href="/authentication/login" Color="Color.Primary">Login here</MudLink>
 					</NotAuthorized>
 				</AuthorizeRouteView>
 			</Found>

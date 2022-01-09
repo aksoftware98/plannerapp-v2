@@ -1,25 +1,60 @@
 ﻿@page "/"
+@using AKSoftware.Localization.MultiLanguages.Blazor
+@inject NavigationManager Navigation
 
 <PageTitle>Home | PlannerApp</PageTitle>
 
-<h1>Hello, world!</h1>
+<PAPage Title="@Language["Welcome"]">
 
-Welcome to your new app.
+	<div class="d-flex align-center">
+		<img src="logo1024.png" style="width: 256px;margin:5px;" />
+		<MudText Typo="Typo.h4">AK PlannerApp</MudText>
+	</div>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+	<MudText Class="mt-3" Typo="Typo.h6">AK PlannerApp is a demo software developed by Ahmad Mozaffar, for AK Academy YouTube channel and the idea of the app covers the follwoing topcis</MudText>
 
-<AuthorizeView>
-    <Authorized>
-        <h2>Welcome</h2>
-    </Authorized>
-    <NotAuthorized>
-        <MudLink Href="/authentication/login">Login</MudLink>
-    </NotAuthorized>
-</AuthorizeView>
+	<MudText Typo="Typo.h6"> - What is Single Page Applications and Blazor WebAssembly</MudText>
+	<MudText Typo="Typo.h6"> - Welcome to MudBlazor</MudText>
+	<MudText Typo="Typo.h6"> - Authentication using JWT Bearer Tokens</MudText>
+	<MudText Typo="Typo.h6"> - Setup efficient HttpClient with delegating handler</MudText>
+	<MudText Typo="Typo.h6"> - Calling and dealing with a Web API (Protected and Unprotected resources)</MudText>
+	<MudText Typo="Typo.h6"> - Write reusable components</MudText>
+	<MudText Typo="Typo.h6"> - Migarte existing app from .NET 5.0 to .NET 6.0</MudText>
+	<MudText Typo="Typo.h6"> - How to communciate between components (Parameters, Cascading Parameters, Event Callbacks, Messaging Center)</MudText>
+	<MudText Typo="Typo.h6"> - Themeing</MudText>
+	<MudText Typo="Typo.h6"> - Localization</MudText>
+	<MudText Typo="Typo.h6"> - Writing a clean code</MudText>
+	<MudText Typo="Typo.h6"> - Architecting a Blazor App</MudText>
+	<MudText Typo="Typo.h6"> - Upload files to API from Blazor App</MudText>
+	<MudText Typo="Typo.h6"> - Strcuture the client-side project</MudText>
+	<MudText Typo="Typo.h6"> - Use advanced MudBlazor components</MudText>
+	<MudText Typo="Typo.h6"> - Implement paging efficiently</MudText>
+	<MudText Typo="Typo.h6"> - Navigation and routing</MudText>
+	<MudText Typo="Typo.h6"> - Global error handling</MudText>
+	<MudText Typo="Typo.h6"> - Working with dialogs</MudText>
 
+	<MudText Typo="Typo.h4" Class="mt-3">Project links:</MudText>
+	<p dir="auto"><a href="https://www.youtube.com/watch?v=fRIyfLXT1f0&list=PLFJQnCcZXWjsYlljYtU0oKTnJDcrLGgM2" rel="nofollow"><img src="https://camo.githubusercontent.com/d79c5549652f9c7690992eb49571d216a70a480681561cbd93bfbfc77c491e54/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f596f75547562652d4646303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d796f7574756265266c6f676f436f6c6f723d7768697465" alt="image" data-canonical-src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&amp;logo=youtube&amp;logoColor=white" style="max-width: 100%;"></a> <a href="https://github.com/aksoftware98/plannerapp-v2"><img src="https://camo.githubusercontent.com/fbc3df79ffe1a99e482b154b29262ecbb10d6ee4ed22faa82683aa653d72c4e1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4769744875622d3130303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d676974687562266c6f676f436f6c6f723d7768697465" alt="image" data-canonical-src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&amp;logo=github&amp;logoColor=white" style="max-width: 100%;"></a></p>
+
+	<MudText Typo="Typo.h4" Class="mt-3">Follow AK on:</MudText>
+	<p dir="auto"><a href="https://www.youtube.com/channel/UCRs-PO48PbbS0l7bBhbu5CA" rel="nofollow"><img src="https://camo.githubusercontent.com/d79c5549652f9c7690992eb49571d216a70a480681561cbd93bfbfc77c491e54/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f596f75547562652d4646303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d796f7574756265266c6f676f436f6c6f723d7768697465" alt="image" data-canonical-src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&amp;logo=youtube&amp;logoColor=white" style="max-width: 100%;"></a> <a href="https://github.com/aksoftware98"><img src="https://camo.githubusercontent.com/fbc3df79ffe1a99e482b154b29262ecbb10d6ee4ed22faa82683aa653d72c4e1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4769744875622d3130303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d676974687562266c6f676f436f6c6f723d7768697465" alt="image" data-canonical-src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&amp;logo=github&amp;logoColor=white" style="max-width: 100%;"></a> <a href="https://twitter.com/ahmadmozaffar99" rel="nofollow"><img src="https://camo.githubusercontent.com/5d03c86f6a75f7cbe80d135d9162fbf6dc46a31253cf30a8e9bb8279b4d574d3/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f547769747465722d3144413146323f7374796c653d666f722d7468652d6261646765266c6f676f3d74776974746572266c6f676f436f6c6f723d7768697465" alt="image" data-canonical-src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&amp;logo=twitter&amp;logoColor=white" style="max-width: 100%;"></a> <a href="https://www.linkedin.com/in/ahmad-mozaffar-a07183123/" rel="nofollow"><img src="https://camo.githubusercontent.com/a80d00f23720d0bc9f55481cfcd77ab79e141606829cf16ec43f8cacc7741e46/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c696e6b6564496e2d3030373742353f7374796c653d666f722d7468652d6261646765266c6f676f3d6c696e6b6564696e266c6f676f436f6c6f723d7768697465" alt="image" data-canonical-src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&amp;logo=linkedin&amp;logoColor=white" style="max-width: 100%;"></a> <a href="https://www.reddit.com/user/aksoftware99" rel="nofollow"><img src="https://camo.githubusercontent.com/99094e7d08f15000fe6a39872628bde2b8cf8a2a4a94ad384e50a158f09d7bf5/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5265646469742d4646343530303f7374796c653d666f722d7468652d6261646765266c6f676f3d726564646974266c6f676f436f6c6f723d7768697465" alt="image" data-canonical-src="https://img.shields.io/badge/Reddit-FF4500?style=for-the-badge&amp;logo=reddit&amp;logoColor=white" style="max-width: 100%;"></a> <a href="https://www.facebook.com/ahmadmozaffar99/" rel="nofollow"><img src="https://camo.githubusercontent.com/2d1ffa69dd491ebeca01b2098cf8233dd09950ff5895abccd5b455ca442abc59/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f46616365626f6f6b2d3138373746323f7374796c653d666f722d7468652d6261646765266c6f676f3d66616365626f6f6b266c6f676f436f6c6f723d7768697465" alt="image" data-canonical-src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&amp;logo=facebook&amp;logoColor=white" style="max-width: 100%;"></a></p>
+
+	<AuthorizeView>
+		<NotAuthorized>
+			<MudLink Href="/authentication/login">Login</MudLink>
+		</NotAuthorized>
+	</AuthorizeView>
+</PAPage>
 @code
 {
 
+	[Inject]
+	public ILanguageContainerService Language { get; set; }
 
+	protected override void OnInitialized()
+	{
+
+		Language.InitLocalizedComponent(this);
+	}
 
 }
