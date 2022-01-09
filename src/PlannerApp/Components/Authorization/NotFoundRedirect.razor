@@ -1,0 +1,14 @@
+﻿@attribute [AllowAnonymous]
+@inject NavigationManager _navigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        var user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User;
+        if (user.Identity is null || !user.Identity.IsAuthenticated)
+            _navigationManager.NavigateTo("/authentication/login");
+        else
+            _navigationManager.NavigateTo("/");
+    }
+}

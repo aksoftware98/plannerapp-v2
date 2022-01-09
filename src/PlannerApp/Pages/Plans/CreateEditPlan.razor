@@ -1,5 +1,6 @@
 ﻿@page "/plans/form"
 @page "/plans/form/{id}"
+@attribute [Authorize]
 
 <PageTitle>@(Id == null ? Language["Create"] : Language["Edit"]) | PlannerApp</PageTitle>
 
