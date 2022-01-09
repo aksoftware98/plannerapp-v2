@@ -1,3 +1,4 @@
+@using PlannerApp.Components.Authorization
 
 <CascadingAuthenticationState>
 	<Error>
@@ -5,13 +6,13 @@
 			<Found Context="routeData">
 				<AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
 					<NotAuthorized>
-						<h3>You don't have access for this page</h3>
+						<LoginRedirect/>
 					</NotAuthorized>
 				</AuthorizeRouteView>
 			</Found>
 			<NotFound>
 				<LayoutView Layout="@typeof(MainLayout)">
-					<p>Sorry, there's nothing at this address.</p>
+					<NotFoundRedirect/>
 				</LayoutView>
 			</NotFound>
 		</Router>

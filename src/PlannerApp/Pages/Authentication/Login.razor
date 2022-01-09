@@ -1,17 +1,27 @@
 ﻿@layout AuthLayout 
 @page "/authentication/login"
 @using AKSoftware.Localization.MultiLanguages.Blazor
+@inject NavigationManager _navigationManager
+@attribute [AllowAnonymous]
+
 
 <PageTitle>@Language["WelcomeTo"] PlannerApp</PageTitle>
 
 <LoginForm />
 
 @code {
-	  [Inject]
-        public ILanguageContainerService Language { get; set; }
+    [Inject]
+    public ILanguageContainerService Language { get; set; }
 
-        protected override void OnInitialized()
-        {
-            Language.InitLocalizedComponent(this);
-        }
+    [Inject]
+    public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Language.InitLocalizedComponent(this);
+        
+        var user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User;
+        if(user.Identity is not null && user.Identity.IsAuthenticated)
+            _navigationManager.NavigateTo("/");
+    }
 }
