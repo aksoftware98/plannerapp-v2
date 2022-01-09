@@ -1,21 +1,9 @@
 ﻿@page "/"
+@attribute [Authorize]
 
 <PageTitle>Home | PlannerApp</PageTitle>
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
-
-<AuthorizeView>
-    <Authorized>
-        <h2>Welcome</h2>
-    </Authorized>
-    <NotAuthorized>
-        <MudLink Href="/authentication/login">Login</MudLink>
-    </NotAuthorized>
-</AuthorizeView>
+<h2>Welcome</h2>
 
 @code
 {
