@@ -1,10 +1,17 @@
 ﻿@layout AuthLayout 
 @page "/authentication/login"
+@using AKSoftware.Localization.MultiLanguages.Blazor
 
-<PageTitle>Welcome to PlannerApp</PageTitle>
+<PageTitle>@Language["WelcomeTo"] PlannerApp</PageTitle>
 
 <LoginForm />
 
 @code {
+	  [Inject]
+        public ILanguageContainerService Language { get; set; }
 
+        protected override void OnInitialized()
+        {
+            Language.InitLocalizedComponent(this);
+        }
 }

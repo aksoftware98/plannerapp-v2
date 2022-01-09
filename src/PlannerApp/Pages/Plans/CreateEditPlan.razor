@@ -1,14 +1,13 @@
 ﻿@page "/plans/form"
 @page "/plans/form/{id}"
 
-<PageTitle>@(Id == null ? "Create" : "Edit") | PlannerApp</PageTitle>
+<PageTitle>@(Id == null ? Language["Create"] : Language["Edit"]) | PlannerApp</PageTitle>
 
-<PAPage Title="Create/Edit a Plan" BreadcrumbItems="_breadcrumbItems">
+<PAPage Title='@Language["PlanFormTitle"]' BreadcrumbItems="_breadcrumbItems">
     <MudGrid>
         <MudItem lg="6" md="8" sm="12">
             <PlanForm Id="@Id"/>
         </MudItem>
     </MudGrid>
 </PAPage>
-
 

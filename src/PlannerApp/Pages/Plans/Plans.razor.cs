@@ -18,17 +18,27 @@ using PlannerApp.Shared;
 using PlannerApp.Components;
 using MudBlazor;
 using Blazored.FluentValidation;
+using AKSoftware.Localization.MultiLanguages;
+using AKSoftware.Localization.MultiLanguages.Blazor;
 
 namespace PlannerApp.Pages.Plans
 {
     public partial class Plans
     {
         
-        private List<BreadcrumbItem> _breadcrumbItems = new()
+        private List<BreadcrumbItem> _breadcrumbItems => new()
         {
-            new BreadcrumbItem("Home", "/index"),
-            new BreadcrumbItem("Plans", "/plans", true)
+            new BreadcrumbItem(Language["Home"], "/index"),
+            new BreadcrumbItem(Language["Plans"], "/plans", true)
         };
+
+        [Inject]
+        public ILanguageContainerService Language { get; set; }
+
+        protected override void OnInitialized()
+        {
+            Language.InitLocalizedComponent(this);
+        }
 
     }
 }
